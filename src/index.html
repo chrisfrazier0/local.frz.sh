@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>local.frz.sh — wildcard localhost DNS</title>
+  <meta name="description" content="Wildcard DNS for local development: *.local.frz.sh resolves to 127.0.0.1">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #111111;
+      --muted: #666666;
+      --rule: #eaeaea;
+      --code-bg: #f7f7f7;
+      --code-border: #e6e6e6;
+      --accent: #0b57d0;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 20px 64px;
+    }
+    header {
+      margin-bottom: 28px;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 10px 0;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--rule);
+      margin: 24px 0;
+    }
+    p {
+      margin: 0 0 14px 0;
+      font-size: 15px;
+    }
+    ul {
+      margin: 10px 0 16px 18px;
+      padding: 0;
+      font-size: 15px;
+    }
+    li { margin: 6px 0; }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+    .callout {
+      border: 1px solid var(--rule);
+      background: #fcfcfc;
+      padding: 14px 14px;
+      border-radius: 10px;
+      margin: 18px 0;
+    }
+    .label {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    pre {
+      margin: 0;
+      padding: 14px 14px;
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 10px;
+      overflow-x: auto;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    code { font-family: inherit; }
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .kbd {
+      border: 1px solid var(--code-border);
+      background: #fff;
+      padding: 0 6px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>local.frz.sh</h1>
+      <p class="subtitle">Wildcard DNS that points back to your own machine.</p>
+    </header>
+    <hr>
+    <p>
+      <strong>What it is:</strong> any hostname under <code>*.local.frz.sh</code> resolves to <code>127.0.0.1</code>.
+      This lets you use “real” hostnames in local configs (routing, vhosts, service discovery) without touching
+      <code>/etc/hosts</code>.
+    </p>
+    <div class="callout">
+      <div class="label">Example</div>
+      <p style="margin: 0 0 12px 0;">
+        Running Kafka locally? Set its advertised hostname to
+        <code>kafka.local.frz.sh</code> and it will resolve to localhost.
+      </p>
+      <pre><code>$ dig +short kafka.local.frz.sh
+127.0.0.1</code></pre>
+    </div>
+    <p><strong>Why it's useful:</strong></p>
+    <ul>
+      <li>Keep configs portable (hostnames work the same across repos and machines).</li>
+      <li>Play nicely with proxies/routers that rely on <span class="kbd">Host</span> headers.</li>
+      <li>No more stale <code>/etc/hosts</code> entries to remember (or forget).</li>
+    </ul>
+    <footer>
+      <hr>
+      <div>Wildcard: <code>*.local.frz.sh → 127.0.0.1</code></div>
+    </footer>
+  </div>
+</body>
+</html>
